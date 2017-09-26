@@ -1,0 +1,171 @@
+<!doctype html>
+<html lang="en" class="no-js">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1">
+	<meta name="description" content="">
+	<meta name="author" content="">
+	<meta name="theme-color" content="#3e454c">
+	
+	<title>TheLoop</title>
+
+	<!-- Font awesome -->
+	<link rel="stylesheet" href="css/font-awesome.min.css">
+	<!-- Sandstone Bootstrap CSS -->
+	<link rel="stylesheet" href="css/bootstrap.min.css">
+	<!-- Bootstrap Datatables -->
+	<link rel="stylesheet" href="css/dataTables.bootstrap.min.css">
+	<!-- Bootstrap social button library -->
+	<link rel="stylesheet" href="css/bootstrap-social.css">
+	<!-- Bootstrap select -->
+	<link rel="stylesheet" href="css/bootstrap-select.css">
+	<!-- Bootstrap file input -->
+	<link rel="stylesheet" href="css/fileinput.min.css">
+	<!-- Awesome Bootstrap checkbox -->
+	<link rel="stylesheet" href="css/awesome-bootstrap-checkbox.css">
+	<!-- Admin Stye -->
+	<link rel="stylesheet" href="css/style.css">
+    <style type="text/css">
+        .white{
+            color: aliceblue;
+        }
+        .white a:hover{
+            color: aliceblue;
+        }
+    </style>
+
+	<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+        <script>
+            
+            var numOn = 0;
+            var allData;
+            
+               $(document).ready(function(){
+                $.ajax({ url: "http://considercode.com/theloop/electionNews.php",
+                        type: "POST",
+                        dataType: 'jsonp',
+                        jsonpCallback:"callback",                   
+                        //This defaults to true if you are truly working cross-domain
+                        //But you can change this for force JSONP if testing on same server
+                        crossDomain:true, 
+                        success: function(data){
+                            allData = data;
+                            var obj = data['article'.concat(numOn)];
+                            var play = document.getElementById('play');
+                            play.innerHTML = "";
+                            play.innerHTML += obj[numOn];
+                         //console.log(data);
+                    }});
+                });
+            
+            
+                function nextArt(){
+                   if(numOn < 9){
+                    numOn = numOn+1;
+                    var obj = allData['article'.concat(numOn)];
+                    var play = document.getElementById('play');
+                    play.innerHTML = "";
+                    play.innerHTML += obj[0];
+                   }else{
+                       
+                   }
+                }
+            function prevArt(){
+                   if(numOn > 0){
+                    numOn = numOn-1;
+                    var obj = allData['article'.concat(numOn)];
+                    var play = document.getElementById('play');
+                    play.innerHTML = "";
+                    play.innerHTML += obj[0];
+                   }else{
+                       
+                   }
+                }
+        </script>
+
+</head>
+
+<body>
+	<div class="brand clearfix">
+		<a href="index.html" class="logo white"><i class="fa fa-newspaper-o"></i> &nbsp;The<b>Loop</b></a>
+		<span class="menu-btn"><i class="fa fa-bars"></i></span>
+		<ul class="ts-profile-nav">
+			<li><a href="#">Help</a></li>
+			<li><a href="#">Settings</a></li>
+			<li class="ts-account">
+				<a href="#"><img src="img/ts-avatar.jpg" class="ts-avatar hidden-side" alt=""> Account <i class="fa fa-angle-down hidden-side"></i></a>
+				<ul>
+					<li><a href="#">My Account</a></li>
+					<li><a href="#">Edit Account</a></li>
+					<li><a href="#">Logout</a></li>
+				</ul>
+			</li>
+		</ul>
+	</div>
+
+	<div class="ts-main-content">
+		<nav class="ts-sidebar">
+			<ul class="ts-sidebar-menu">
+							<li class="ts-label white">Made with <i class="fa fa-heart"></i> ConsiderCode LLC</li>
+				<li class="ts-label">Topics</li>
+                <li><a href="index.html"><i class="fa fa-child"></i>World News</a></li>
+                <li ><a href="usNews.html"><i class="fa fa-flag"></i>U.S.</a></li>
+                <li class="open"><a href="electNews.html"><i class="fa fa-ticket"></i>Elections</a></li>
+                <li><a href="businessNews.html"><i class="fa fa-briefcase"></i>Business</a></li>
+                <li><a href="technologyNews.html"><i class="fa fa-cog"></i>Technology</a></li>
+                <li><a href="entertainmentNews.html"><i class="fa fa-film"></i>Entertainment</a></li>
+                <li><a href="sportsNews.html"><i class="fa fa-soccer-ball-o"></i>Sports</a></li>
+                <li><a href="scienceNews.html"><i class="fa fa-flask"></i>Science</a></li>
+                <li><a href="healthNews.html"><i class="fa fa-plus"></i>Health</a></li>
+
+
+			</ul>
+		</nav>
+		<div class="content-wrapper">
+			<div class="container-fluid">
+
+				<div class="row">
+					<div class="col-md-12">
+
+						<h2 class="page-title">Elections News <a href="electNews.html"><i class="fa fa-refresh right black"></i></a></h2>
+						
+						<div id='play'>
+                         <br>
+                            <br>
+                    
+                            <center><h3>Loading Content...</h3>
+                                <hr>
+                            <div class="progress progress-striped active">
+								  <div class="progress-bar" style="width: 45%"></div>
+								</div>
+                            </center>
+                        </div>
+					</div>
+				</div>
+
+			</div>
+		</div>
+	</div>
+
+	<!-- Loading Scripts -->
+	<script src="js/jquery.min.js"></script>
+	<script src="js/bootstrap-select.min.js"></script>
+	<script src="js/bootstrap.min.js"></script>
+	<script src="js/jquery.dataTables.min.js"></script>
+	<script src="js/dataTables.bootstrap.min.js"></script>
+	<script src="js/Chart.min.js"></script>
+	<script src="js/fileinput.js"></script>
+	<script src="js/chartData.js"></script>
+	<script src="js/main.js"></script>
+	
+
+
+</body>
+
+</html>

@@ -1,0 +1,25 @@
+<html>
+    <head>
+        <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.6.2/jquery.min.js"></script>
+        <script>
+               $(document).ready(function(){
+                $.ajax({ url: "http://considercode.com/theloop/index.php",
+                        type: "POST",
+                        dataType: 'jsonp',
+                        jsonpCallback:"callback",                   
+                        //This defaults to true if you are truly working cross-domain
+                        //But you can change this for force JSONP if testing on same server
+                        crossDomain:true, 
+                        success: function(data){
+                            for (i = 0; i <9; i++) {
+                                document.getElementById("play").innerHTML = data.article0[0];
+                            }
+                         console.log(data);
+                    }});
+                });
+        </script>
+    </head>
+    <body>
+        <div id='play'></div>
+    </body>
+</html>
